@@ -1,0 +1,35 @@
+name: Sync forks
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Solo listar los forks; no sincronizar"
+        type: boolean
+        required: true
+        default: true
+  schedule:
+    - cron: "0 2 * * *"
+      timezone: "Europe/Madrid"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-forks
+  cancel-in-progress: false
+
+jobs:
+  sync-forks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync organization forks
+        env:
+          GH_TOKEN: ${{ secrets.ORG_TOKEN }}
+          GITHUB_ORG: sygel-technology
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
+        run: bash scripts/sync-forks.sh

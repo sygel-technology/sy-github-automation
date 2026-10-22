@@ -1,0 +1,5 @@
+# Un fork por línea, usando el nombre completo OWNER/REPO.
+sygel-technology/oca-github-bot
+sygel-technology/maintainer-tools
+sygel-technology/oca-addons-repo-template
+sygel-technology/repo-maintainer-conf
