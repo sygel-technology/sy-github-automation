@@ -9,7 +9,7 @@ on:
         required: true
         default: true
   schedule:
-    - cron: "0 9 * * *"
+    - cron: "17 9 * * *"
       timezone: "Europe/Madrid"
 
 permissions:
